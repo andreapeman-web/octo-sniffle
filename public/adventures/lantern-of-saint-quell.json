@@ -464,5 +464,195 @@
   "Pain flares as its attack connects.",
   "You misjudge the moment and it punishes you."
  ],
- "credits": "Story, locations and characters are original. Monster statistics from the System Reference Document 5.1 by Wizards of the Coast LLC, licensed under CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/)."
+ "credits": "Story, locations and characters are original. Monster statistics from the System Reference Document 5.1 by Wizards of the Coast LLC, licensed under CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/).",
+ "map": {
+  "w": 1000,
+  "h": 680,
+  "title": "The Hollowmere Fens",
+  "locations": {
+   "mill-road": {
+    "x": 110,
+    "y": 540,
+    "terrain": "night-road"
+   },
+   "hollowmere-gate": {
+    "x": 250,
+    "y": 420,
+    "terrain": "village"
+   },
+   "bramble-ford": {
+    "x": 380,
+    "y": 560,
+    "terrain": "ford"
+   },
+   "drowned-path": {
+    "x": 530,
+    "y": 470,
+    "terrain": "marsh"
+   },
+   "chapel-crypt": {
+    "x": 640,
+    "y": 405,
+    "terrain": "crypt"
+   },
+   "bell-tower": {
+    "x": 700,
+    "y": 350,
+    "terrain": "tower"
+   },
+   "undercroft": {
+    "x": 610,
+    "y": 330,
+    "terrain": "undercroft"
+   },
+   "tarn-shore": {
+    "x": 780,
+    "y": 250,
+    "terrain": "shore"
+   },
+   "tarn-caves": {
+    "x": 880,
+    "y": 150,
+    "terrain": "cave"
+   }
+  },
+  "safePlaces": {
+   "temple": {
+    "terrain": "temple"
+   },
+   "shrine": {
+    "terrain": "shrine"
+   },
+   "inn": {
+    "terrain": "inn"
+   }
+  },
+  "features": [
+   {
+    "type": "water",
+    "points": [
+     [
+      760,
+      120
+     ],
+     [
+      860,
+      90
+     ],
+     [
+      950,
+      120
+     ],
+     [
+      960,
+      200
+     ],
+     [
+      900,
+      240
+     ],
+     [
+      820,
+      230
+     ],
+     [
+      760,
+      190
+     ]
+    ],
+    "label": "Black Tarn"
+   },
+   {
+    "type": "river",
+    "points": [
+     [
+      300,
+      0
+     ],
+     [
+      330,
+      140
+     ],
+     [
+      360,
+      300
+     ],
+     [
+      370,
+      450
+     ],
+     [
+      385,
+      560
+     ],
+     [
+      420,
+      680
+     ]
+    ],
+    "label": "River Quell"
+   },
+   {
+    "type": "mountains",
+    "x": 860,
+    "y": 330,
+    "r": 90
+   },
+   {
+    "type": "mountains",
+    "x": 700,
+    "y": 80,
+    "r": 80
+   },
+   {
+    "type": "forest",
+    "x": 120,
+    "y": 300,
+    "r": 110
+   },
+   {
+    "type": "forest",
+    "x": 150,
+    "y": 620,
+    "r": 70
+   },
+   {
+    "type": "forest",
+    "x": 480,
+    "y": 220,
+    "r": 90
+   },
+   {
+    "type": "forest",
+    "x": 930,
+    "y": 560,
+    "r": 90
+   },
+   {
+    "type": "marsh",
+    "x": 560,
+    "y": 520,
+    "r": 110,
+    "label": "The Drowned Fen"
+   },
+   {
+    "type": "marsh",
+    "x": 690,
+    "y": 470,
+    "r": 70
+   },
+   {
+    "type": "hills",
+    "x": 260,
+    "y": 560,
+    "r": 60
+   },
+   {
+    "type": "hills",
+    "x": 800,
+    "y": 420,
+    "r": 70
+   }
+  ]
+ }
 }

@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useApp } from "../App";
 import { Bar, Placeholder, StoredImg, TopBar } from "../components/ui";
+import { heroPalette, spriteUrl } from "../art/sprites";
 import { levelRow, maxHp, nextLevelXp, playerDamage } from "../lib/engine";
 import { storeImage } from "../lib/images";
 
@@ -15,7 +16,7 @@ export function CharacterScreen() {
     <main className="screen">
       <TopBar title="Character" onBack={() => go(run.phase === "done" ? "home" : "play")} />
       <section className="card char-sheet">
-        <StoredImg id={c.portraitId} alt={c.name} className="portrait big-portrait" fallback={<Placeholder kind="portrait" label={c.name} icon="🛡️" />} />
+        <StoredImg id={c.portraitId} alt={c.name} className="portrait big-portrait" fallback={<img className="pixel portrait big-portrait" src={spriteUrl("hero", heroPalette(c.level))} alt="" />} />
         <h2>{c.name}</h2>
         <p className="muted">Level {c.level} · {playerDamage(c, levels)} damage per correct answer</p>
         <Bar kind="hp" value={c.hp} max={maxHp(c, levels)} label={`HP ${c.hp} / ${maxHp(c, levels)}`} />

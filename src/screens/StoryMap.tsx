@@ -1,6 +1,7 @@
 import { useApp } from "../App";
 import { TopBar } from "../components/ui";
 import { lineup } from "../lib/engine";
+import { MapView } from "../art/MapView";
 
 export function StoryMap() {
   const { run, adventure, go } = useApp();
@@ -10,6 +11,7 @@ export function StoryMap() {
   return (
     <main className="screen">
       <TopBar title="Story map" onBack={() => go(run.phase === "done" ? "home" : "play")} />
+      <MapView adv={adventure} stopIndex={run.phase === "done" ? adventure.stops.length : run.stopIndex} />
       <div className="stat-row">
         <div className="stat"><b>{run.stats.visited.length}/{locations.length}</b><span>locations</span></div>
         <div className="stat"><b>{run.stats.defeated.length}/{totalMonsters}</b><span>monsters</span></div>
@@ -18,7 +20,7 @@ export function StoryMap() {
       {adventure.chapters.map((ch) => {
         const stops = adventure.stops.map((s, i) => ({ s, i })).filter((x) => x.s.chapterId === ch.id);
         return (
-          <section className="card" key={ch.id}>
+          <section className="parchment" key={ch.id}>
             <h3>{ch.title}</h3>
             <ol className="map">
               {stops.map(({ s, i }) => {

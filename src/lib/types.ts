@@ -80,6 +80,8 @@ export interface Monster {
   source: string;
   description?: string;
   icon?: string;
+  /** Built-in pixel sprite (wolf, goblin, bugbear, rat, skeleton, zombie, spider, ghoul, bandit, ogre). */
+  sprite?: string;
 }
 
 export interface EncounterDef {
@@ -113,6 +115,24 @@ export interface Chapter {
   title: string;
 }
 
+export interface MapFeature {
+  type: "water" | "river" | "forest" | "mountains" | "marsh" | "hills" | "label";
+  x?: number;
+  y?: number;
+  r?: number;
+  points?: [number, number][];
+  label?: string;
+}
+
+export interface AdventureMap {
+  w: number;
+  h: number;
+  title?: string;
+  locations: Record<string, { x: number; y: number; terrain?: string }>;
+  safePlaces?: Record<string, { terrain?: string }>;
+  features: MapFeature[];
+}
+
 export interface Adventure {
   format: "study-rpg-adventure";
   version: 1;
@@ -131,6 +151,8 @@ export interface Adventure {
   hitLines: string[];
   missLines: string[];
   credits?: string;
+  /** Optional overland map; generated from the stops when missing. */
+  map?: AdventureMap;
 }
 
 // ---------- Run / character ----------

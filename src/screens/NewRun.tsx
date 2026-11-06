@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useApp } from "../App";
-import { Placeholder, TopBar } from "../components/ui";
+import { TopBar } from "../components/ui";
+import { heroPalette, spriteUrl } from "../art/sprites";
 import { newRun } from "../lib/engine";
 import { storeImage } from "../lib/images";
 import { deleteRun, saveAdventure, validateAdventure } from "../lib/store";
@@ -69,10 +70,10 @@ export function NewRun() {
           <input value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. Sir Andrea" maxLength={40} />
         </label>
         <div className="portrait-pick">
-          {preview ? <img src={preview} className="portrait" alt="Portrait preview" /> : <Placeholder kind="portrait" label={name || "?"} icon="🛡️" />}
+          {preview ? <img src={preview} className="portrait" alt="Portrait preview" /> : <img className="pixel ph" src={spriteUrl("hero", heroPalette(adv?.recommendedLevel ?? 1))} alt="" />}
           <div>
             <button className="btn" onClick={() => fileRef.current?.click()}>{portrait ? "Change picture" : "Upload a picture"}</button>
-            <p className="muted small">Optional. Image generation comes in a later version.</p>
+            <p className="muted small">Optional. In battle you appear as the pixel knight; the portrait shows on your character sheet.</p>
           </div>
           <input
             ref={fileRef}

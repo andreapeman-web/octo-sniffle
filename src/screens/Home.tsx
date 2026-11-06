@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useApp } from "../App";
-import { Bar, Placeholder, StoredImg } from "../components/ui";
+import { Bar, StoredImg } from "../components/ui";
+import { heroPalette, spriteUrl } from "../art/sprites";
+import { MapView } from "../art/MapView";
 import { levelRow, nextLevelXp } from "../lib/engine";
 import { getStreak, markCount, type Streak } from "../lib/questions";
 import { kvGet } from "../lib/db";
@@ -48,7 +50,7 @@ export function Home() {
       {c && adventure ? (
         <section className="card hero-card">
           <button className="portrait-btn" onClick={() => go("character")} aria-label="Character">
-            <StoredImg id={c.portraitId} alt={c.name} className="portrait" fallback={<Placeholder kind="portrait" label={c.name} icon="🛡️" />} />
+            <StoredImg id={c.portraitId} alt={c.name} className="portrait" fallback={<img className="pixel" src={spriteUrl("hero", heroPalette(c.level))} alt="" />} />
           </button>
           <div className="hero-info">
             <h2>{c.name}</h2>
@@ -69,6 +71,7 @@ export function Home() {
           {sync === "synced" ? "● Progress saved to your Claude account" : sync === "connecting" ? "○ Connecting to your account…" : sync === "error" ? "● Account sync unavailable, saving in this browser" : "● Saving in this browser only"}
         </p>
       )}
+      {run && adventure && <MapView adv={adventure} stopIndex={run.phase === "done" ? adventure.stops.length : run.stopIndex} compact />}
       <div className="stat-row">
         <div className="stat"><b>{streak?.count ?? 0}</b><span>day streak</span></div>
         <div className="stat"><b>{marks}</b><span>marked</span></div>

@@ -3,11 +3,12 @@ import { useApp } from "../App";
 import { storeImage, forgetImageUrl } from "../lib/images";
 import type { Monster } from "../lib/types";
 import { Modal, Placeholder, StoredImg } from "./ui";
+import { spriteFor, spriteUrl } from "../art/sprites";
 
 export const assetId = (advId: string, kind: "monster" | "location", id: string) => `asset:${advId}:${kind}:${id}`;
 
 /** Adventure art with a placeholder and an optional "replace with my own file" button. */
-export function AssetImage({ kind, id, label, icon, editable }: { kind: "monster" | "location"; id: string; label: string; icon?: string; editable?: boolean }) {
+export function AssetImage({ kind, id, label, icon, editable, sprite }: { kind: "monster" | "location"; id: string; label: string; icon?: string; editable?: boolean; sprite?: string }) {
   const { adventure } = useApp();
   const [v, setV] = useState(0);
   const ref = useRef<HTMLInputElement>(null);
@@ -15,10 +16,10 @@ export function AssetImage({ kind, id, label, icon, editable }: { kind: "monster
   const aid = assetId(adventure.id, kind, id);
   return (
     <div className={`asset asset-${kind}`}>
-      <StoredImg key={v} id={aid} alt={label} className={`asset-img`} fallback={<Placeholder kind={kind} label={label} icon={icon} />} />
+      <StoredImg key={v} id={aid} alt={label} className={`asset-img`} fallback={sprite ? <img className="pixel asset-sprite" src={spriteUrl(sprite)} alt={label} /> : <Placeholder kind={kind} label={label} icon={icon} />} />
       {editable && (
         <>
-          <button className="asset-edit" onClick={() => ref.current?.click()} aria-label={`Replace image for ${label}`}>🖼</button>
+          <button className="asset-edit" onClick={() => ref.current?.click()}>Use my own picture</button>
           <input
             ref={ref}
             type="file"
@@ -65,7 +66,10 @@ export function StatBlock({ monster, onClose }: { monster: Monster; onClose: () 
   return (
     <Modal title={monster.name} onClose={onClose}>
       <div className="statblock">
-        {monster.description && <p><em>{monster.description}</em></p>}
+        <div className="statblock-head">
+          <AssetImage kind="monster" id={monster.id} label={monster.name} editable sprite={spriteFor(monster.name, monster.sprite)} />
+          {monster.description && <p><em>{monster.description}</em></p>}
+        </div>
         <p>
           <b>Armour Class</b> {monster.ac ?? "—"} · <b>Challenge</b> {monster.cr ?? "—"}
         </p>
