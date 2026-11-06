@@ -185,7 +185,10 @@ export function BattleScreen({ terrain, foe, hero, event, message, aside }: Prop
           </div>
           <HpBar value={shownHeroHp} max={hero.maxHp} label="Your hit points" />
           <div className="plate-nums">{shownHeroHp}/{hero.maxHp}</div>
-          <div className="xpbar"><span style={{ width: `${hero.xpPct}%` }} /></div>
+          <div className="xprow" title="Experience toward the next level">
+            <span className="hpbar-tag xp-tag">XP</span>
+            <div className="xpbar" role="meter" aria-label="Experience toward the next level" aria-valuenow={hero.xpPct} aria-valuemin={0} aria-valuemax={100}><span style={{ width: `${hero.xpPct}%` }} /></div>
+          </div>
         </div>
         {dmg && (
           <div key={dmg.key + dmg.at} className={`dmg ${dmg.cls} dmg-${dmg.at}`} aria-hidden="true">
