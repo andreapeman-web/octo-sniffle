@@ -1,6 +1,7 @@
 // App-level persistence helpers: settings, levels table, adventures, runs.
 import { db, kvGet, kvSet } from "./db";
-import { deleteRunRemote, pushAdventure, pushKv, pushRun } from "./sync";
+import { deleteAdventureRemote, deleteRunRemote, pushAdventure, pushKv, pushRun } from "./sync";
+import { deleteImage } from "./images";
 import type { Adventure, LevelRow, Run, Settings } from "./types";
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -38,6 +39,22 @@ export async function loadLevels(): Promise<LevelRow[]> {
 }
 
 const BUILTIN = ["lantern-of-saint-quell"];
+export const isBuiltin = (id: string) => BUILTIN.includes(id);
+
+/**
+ * Erase a campaign: its progress, cached narration, your pictures and map pins.
+ * An imported adventure is removed from the library too; the built-in one stays,
+ * fresh. Study marks and statistics are kept (they belong to your questions).
+ */
+export async function eraseAdventure(id: string) {
+  await deleteRun(id);
+  const d = await db();
+  const imgs = (await d.getAllKeys("images")).map(String).filter((k) => k.startsWith(`asset:${id}:`) || k.startsWith(`portrait:${id}:`));
+  for (const k of imgs) await deleteImage(k);
+  await d.delete("kv", `art:${id}`);
+  if (!isBuiltin(id)) await d.delete("adventures", id);
+  deleteAdventureRemote(id);
+}
 
 export async function listAdventures(): Promise<Adventure[]> {
   const d = await db();

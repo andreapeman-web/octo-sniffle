@@ -104,7 +104,10 @@ export function Home() {
 
       {adventures.length > 1 && (
         <section className="card">
-          <h3>Library</h3>
+          <div className="row" style={{ justifyContent: "space-between" }}>
+            <h3>Library</h3>
+            <button className="btn small" onClick={() => go("newrun")}>Manage</button>
+          </div>
           {adventures.map((a) => (
             <button key={a.id} className={`list-btn ${a.id === adventure?.id ? "active" : ""}`} onClick={() => openAdventure(a.id)}>
               {a.title}

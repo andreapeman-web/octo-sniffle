@@ -184,6 +184,11 @@ export function deleteRemote(docId: string) {
   schedule(docId, async () => null, 0);
 }
 
+export function deleteAdventureRemote(adventureId: string) {
+  deleteRemote(`adv~${safeId(adventureId)}`);
+  deleteRemote(`kv~art:${adventureId}`);
+}
+
 export function deleteRunRemote(adventureId: string) {
   deleteRemote(`run~${safeId(adventureId)}`);
   deleteRemote(`narr~${safeId(adventureId)}`);

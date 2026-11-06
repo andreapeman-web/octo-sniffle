@@ -1,14 +1,14 @@
 import { useRef, useState } from "react";
 import { useApp } from "../App";
-import { TopBar } from "../components/ui";
+import { ConfirmButton, TopBar } from "../components/ui";
 import { heroPalette, spriteUrl } from "../art/sprites";
 import { newRun } from "../lib/engine";
 import { storeImage } from "../lib/images";
-import { deleteRun, saveAdventure, validateAdventure } from "../lib/store";
+import { deleteRun, eraseAdventure, isBuiltin, saveAdventure, validateAdventure } from "../lib/store";
 import type { Adventure } from "../lib/types";
 
 export function NewRun() {
-  const { adventures, adventure, openAdventure, refreshAdventures, levels, setRun, go, run } = useApp();
+  const { adventures, adventure, openAdventure, refreshAdventures, reloadAll, levels, setRun, go, run } = useApp();
   const [advId, setAdvId] = useState(adventure?.id ?? adventures[0]?.id);
   const [name, setName] = useState(run?.character.name ?? "");
   const [portrait, setPortrait] = useState<File>();
@@ -64,6 +64,25 @@ export function NewRun() {
         </div>
         <input ref={advFileRef} type="file" accept=".json,application/json" hidden onChange={(e) => e.target.files?.[0] && importAdventure(e.target.files[0])} />
         {adv && <p className="muted">{adv.synopsis}</p>}
+        {adv && (
+          <div className="erase-row">
+            <ConfirmButton
+              className="btn small ghost"
+              confirmLabel={isBuiltin(adv.id) ? "Tap again: erase progress and pictures" : `Tap again: delete “${adv.title}”`}
+              onConfirm={async () => {
+                await eraseAdventure(adv.id);
+                await reloadAll();
+                setAdvId(adventures.find((a) => a.id !== adv.id)?.id ?? "");
+                setErr(undefined);
+              }}
+            >
+              {isBuiltin(adv.id) ? "Erase this campaign's progress" : "Delete this adventure"}
+            </ConfirmButton>
+            <span className="muted small">
+              {isBuiltin(adv.id) ? "Removes your run, its pictures and map pins. The sample adventure stays available." : "Removes the adventure, your run, its pictures and map pins."} Study marks and statistics are kept.
+            </span>
+          </div>
+        )}
         {err && <pre className="error">{err}</pre>}
       </section>
 
