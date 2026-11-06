@@ -97,6 +97,8 @@ export function Home() {
           <button className="btn" onClick={() => go("map")} disabled={!run}>Story map</button>
           <button className="btn" onClick={() => go("stats")}>Stats</button>
           <button className="btn" onClick={() => go("character")} disabled={!run}>Character</button>
+          <button className="btn" onClick={() => go("art")} disabled={!adventure}>Art checklist</button>
+          <button className="btn" onClick={() => go("import")}>Import a module</button>
         </div>
       </div>
 

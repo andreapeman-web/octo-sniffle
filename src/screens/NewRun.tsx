@@ -57,7 +57,11 @@ export function NewRun() {
             <small>{a.stops.length} fights · {a.chapters.length} chapters · starts at level {a.recommendedLevel}</small>
           </button>
         ))}
-        <button className="btn small" onClick={() => advFileRef.current?.click()}>Import adventure file (.json)</button>
+        <div className="row">
+          <button className="btn" onClick={() => go("import")}>Import a module (PDF)</button>
+          {adv && <button className="btn" onClick={async () => { await openAdventure(adv.id); go("art"); }}>Art checklist</button>}
+          <button className="btn small ghost" onClick={() => advFileRef.current?.click()}>Adventure file (.json)</button>
+        </div>
         <input ref={advFileRef} type="file" accept=".json,application/json" hidden onChange={(e) => e.target.files?.[0] && importAdventure(e.target.files[0])} />
         {adv && <p className="muted">{adv.synopsis}</p>}
         {err && <pre className="error">{err}</pre>}

@@ -123,3 +123,24 @@ export async function callClaude<T>(path: string, body: unknown): Promise<T> {
     throw e;
   }
 }
+
+/** A general JSON request to Claude (used by module import). Rejects with the sample error shape. */
+export async function askJson<T>(prompt: string, opts: { tier: "quick" | "default" | "complex"; images?: Blob[]; signal?: AbortSignal }): Promise<T> {
+  const sample = await getSample();
+  if (!sample) throw { code: "unavailable", message: "Claude is not available in this view." };
+  const o: Record<string, unknown> = { modelTier: opts.tier };
+  if (opts.images?.length) o.images = opts.images;
+  if (opts.signal) o.signal = opts.signal;
+  return sample.json<T>(prompt, o);
+}
+
+/** How many page images one call may carry (0 when images can't be sent). */
+export async function imageLimit(): Promise<number> {
+  const sample = (await getSample()) as unknown as { limits?: () => Promise<{ images?: { maxCount: number } }> } | null;
+  if (!sample?.limits) return 0;
+  try {
+    return (await sample.limits()).images?.maxCount ?? 0;
+  } catch {
+    return 0;
+  }
+}

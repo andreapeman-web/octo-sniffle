@@ -3,7 +3,7 @@
 // Hits play short animations: lunge, flash, shake, a floating damage number and an
 // HP bar that drains in steps.
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { StoredImg } from "../components/ui";
+import { useStoredImage } from "../lib/images";
 import { sceneUrl } from "./scenes";
 import { heroPalette, spriteUrl } from "./sprites";
 
@@ -35,6 +35,10 @@ export interface StageHero {
 
 interface Props {
   terrain: string;
+  /** The player's own picture for this place (replaces the pixel scene). */
+  backdropId?: string;
+  /** The player's own picture of their hero (replaces the pixel knight). */
+  heroImageId?: string;
   foe: StageFoe | null;
   hero: StageHero;
   event: StageEvent | null;
@@ -85,7 +89,15 @@ export function TypeText({ text }: { text: string }) {
   );
 }
 
-export function BattleScreen({ terrain, foe, hero, event, message, aside }: Props) {
+function ActorImg({ imageId, sprite, palette, alt }: { imageId?: string; sprite: string; palette?: Record<string, string>; alt: string }) {
+  const img = useStoredImage(imageId);
+  if (img === undefined && imageId) return <div className="actor-wait" />;
+  if (img) return <img src={img.url} alt={alt} className={`actor-photo ${img.type === "image/png" ? "" : "vignette"}`} draggable={false} />;
+  return <img src={spriteUrl(sprite, palette)} alt={alt} className="pixel" draggable={false} />;
+}
+
+export function BattleScreen({ terrain, backdropId, heroImageId, foe, hero, event, message, aside }: Props) {
+  const bg = useStoredImage(backdropId);
   const [foeAnim, setFoeAnim] = useState("enter");
   const [heroAnim, setHeroAnim] = useState("enter");
   const [shake, setShake] = useState(false);
@@ -154,7 +166,18 @@ export function BattleScreen({ terrain, foe, hero, event, message, aside }: Prop
 
   return (
     <div className={`battle ${shake ? "shake" : ""}`}>
-      <div className="stage" style={{ backgroundImage: `url(${sceneUrl(terrain, true)})` }}>
+      <div className={`stage ${bg ? "stage-photo" : ""}`}>
+        {bg === undefined && backdropId ? null : bg ? (
+          <img className="stage-bg" src={bg.url} alt="" />
+        ) : (
+          <img className="stage-bg pixel" src={sceneUrl(terrain, true)} alt="" />
+        )}
+        {bg && (
+          <>
+            <div className="ground gs-foe" />
+            <div className="ground gs-hero" />
+          </>
+        )}
         {foe && (
           <>
             <div className="plate plate-foe">
@@ -166,17 +189,12 @@ export function BattleScreen({ terrain, foe, hero, event, message, aside }: Prop
               {foe.maxHp !== undefined && <div className="plate-nums">{shownFoeHp}/{foe.maxHp}</div>}
             </div>
             <div key={foeKey} className={`actor actor-foe a-${foeAnim}`}>
-              <StoredImg
-                id={foe.imageId}
-                alt={foe.label}
-                className="actor-photo"
-                fallback={<img src={spriteUrl(foe.sprite)} alt={foe.label} className="pixel" draggable={false} />}
-              />
+              <ActorImg imageId={foe.imageId} sprite={foe.sprite} alt={foe.label} />
             </div>
           </>
         )}
         <div className={`actor actor-hero a-${heroAnim}`}>
-          <img src={spriteUrl("hero", heroPalette(hero.level))} alt={hero.name} className="pixel" draggable={false} />
+          <ActorImg imageId={heroImageId} sprite="hero" palette={heroPalette(hero.level)} alt={hero.name} />
         </div>
         <div className="plate plate-hero">
           <div className="plate-name">

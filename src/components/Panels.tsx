@@ -5,7 +5,8 @@ import type { Monster } from "../lib/types";
 import { Modal, Placeholder, StoredImg } from "./ui";
 import { spriteFor, spriteUrl } from "../art/sprites";
 
-export const assetId = (advId: string, kind: "monster" | "location", id: string) => `asset:${advId}:${kind}:${id}`;
+export { assetId } from "../lib/art";
+import { assetId } from "../lib/art";
 
 /** Adventure art with a placeholder and an optional "replace with my own file" button. */
 export function AssetImage({ kind, id, label, icon, editable, sprite }: { kind: "monster" | "location"; id: string; label: string; icon?: string; editable?: boolean; sprite?: string }) {

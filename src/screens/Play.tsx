@@ -5,6 +5,7 @@ import { MapView, safePlaceTerrain, stopTerrain } from "../art/MapView";
 import { sceneUrl } from "../art/scenes";
 import { heroPalette, spriteFor, spriteUrl } from "../art/sprites";
 import { assetId, StatBlock, TopicPicker } from "../components/Panels";
+import { useStoredImage } from "../lib/images";
 import { QuestionCard } from "../components/QuestionCard";
 import { Modal, RichText, TopBar } from "../components/ui";
 import { getEndingNarration, getRestNarration, getStopNarration, prefetchNext } from "../lib/ai";
@@ -82,10 +83,12 @@ function foeOf(adv: Adventure, m: Monster, label: string, hp: number): StageFoe 
 }
 
 /** The place, painted in pixels, with the hero walking in. */
-function SceneBanner({ terrain, level, caption }: { terrain: string; level: number; caption?: string }) {
+function SceneBanner({ terrain, level, caption, imageId }: { terrain: string; level: number; caption?: string; imageId?: string }) {
+  const img = useStoredImage(imageId);
   return (
-    <div className="scene-banner" style={{ backgroundImage: `url(${sceneUrl(terrain)})` }}>
-      <img className="pixel scene-hero" src={spriteUrl("hero", heroPalette(level))} alt="" />
+    <div className={`scene-banner ${img ? "scene-photo" : ""}`}>
+      {img === undefined && imageId ? null : img ? <img className="scene-bg" src={img.url} alt="" /> : <img className="scene-bg pixel" src={sceneUrl(terrain)} alt="" />}
+      {!img && <img className="pixel scene-hero" src={spriteUrl("hero", heroPalette(level))} alt="" />}
       {caption && <span className="scene-caption">{caption}</span>}
     </div>
   );
@@ -122,7 +125,7 @@ function NarrationView() {
       <TopBar title={stop.location} onBack={() => go("home")} right={<button className="icon-btn" onClick={() => go("map")} aria-label="Story map">🗺</button>} />
       {firstOfChapter && <p className="chapter-title">{chapter?.title}</p>}
       <MapView adv={adventure!} stopIndex={run!.stopIndex} travel compact />
-      <SceneBanner terrain={terrain} level={c.level} caption={stop.location} />
+      <SceneBanner terrain={terrain} level={c.level} caption={stop.location} imageId={assetId(adventure!.id, "location", stop.locationId)} />
       <article className="parchment narration">
         {run!.stopIndex === 0 && <RichText text={adventure!.intro} className="intro" />}
         {text ? <RichText text={text} className="dropcap" /> : <p className="muted">The Dungeon Master is writing…</p>}
@@ -249,6 +252,8 @@ function CombatView({ setHold }: { setHold: (h: boolean) => void }) {
       <TopBar title={stop.encounter.name} onBack={() => go("home")} right={cur && cur.total > 1 ? <span className="foe-count">{Math.min(cur.index + 1, cur.total)}/{cur.total}</span> : undefined} />
       <BattleScreen
         terrain={terrain}
+        backdropId={assetId(adventure!.id, "location", stop.locationId)}
+        heroImageId={assetId(adventure!.id, "hero", "battle")}
         foe={foe}
         hero={heroOf(run!.character, levels)}
         event={stageEvent}
@@ -318,7 +323,7 @@ function ResultsView() {
   return (
     <>
       <TopBar title="Victory" onBack={() => go("home")} />
-      <SceneBanner terrain={terrain} level={run!.character.level} caption={`${stop.encounter.name} defeated`} />
+      <SceneBanner terrain={terrain} level={run!.character.level} caption={`${stop.encounter.name} defeated`} imageId={assetId(adventure!.id, "location", stop.locationId)} />
       <section className="parchment results">
         <h2>{stop.encounter.boss ? "The boss is beaten!" : "The way is clear"}</h2>
         <div className="stat-row">
@@ -401,6 +406,8 @@ function RestView() {
       <TopBar title={story?.place ?? place.name} onBack={() => go("home")} />
       <BattleScreen
         terrain={terrain}
+        backdropId={assetId(adventure!.id, "safe", place.id)}
+        heroImageId={assetId(adventure!.id, "hero", "battle")}
         foe={{ id: "tome", label: "Mock combat", sub: item?.marked ? "marked questions" : "random questions", sprite: "tome" }}
         hero={heroOf(c, levels)}
         event={stageEvent}

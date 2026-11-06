@@ -131,6 +131,8 @@ export interface AdventureMap {
   locations: Record<string, { x: number; y: number; terrain?: string }>;
   safePlaces?: Record<string, { terrain?: string }>;
   features: MapFeature[];
+  /** Positions (in % of the image) of locations on the player's own map picture. */
+  pins?: Record<string, { x: number; y: number }>;
 }
 
 export interface Adventure {
@@ -153,6 +155,9 @@ export interface Adventure {
   credits?: string;
   /** Optional overland map; generated from the stops when missing. */
   map?: AdventureMap;
+  /** Where the module itself has art for an asset, keyed "monster:<id>", "location:<id>", "safe:<id>", "map:main". */
+  artNotes?: Record<string, string>;
+  npcs?: { name: string; role?: string }[];
 }
 
 // ---------- Run / character ----------

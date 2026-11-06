@@ -108,7 +108,7 @@ const kvDoc = (key: string) => async () => {
   return v === undefined ? null : ({ v } as Doc);
 };
 
-export function pushKv(key: "settings" | "streak" | "lastExport") {
+export function pushKv(key: string) {
   schedule(`kv~${key}`, kvDoc(key));
 }
 
@@ -170,7 +170,13 @@ export function pushImage(id: string) {
   schedule(`img~${safeId(id)}`, async () => {
     const rec = await (await db()).get("images", id);
     if (!rec || rec.kind === "question") return null;
-    return { id, kind: rec.kind, width: rec.width, height: rec.height, url: await blobToDataUrl(rec.blob) };
+    const url = await blobToDataUrl(rec.blob);
+    if (url.length < 200_000) return { id, kind: rec.kind, width: rec.width, height: rec.height, url };
+    // Too big for a document: keep it in the artifact's file store and save a pointer.
+    const assets = await capability("assets");
+    if (!assets) return null;
+    const up = await assets.upload(rec.blob);
+    return { id, kind: rec.kind, width: rec.width, height: rec.height, blobId: up.id };
   }, 200);
 }
 
@@ -213,6 +219,19 @@ export async function startSync(): Promise<boolean> {
       return false;
     }
 
+    // Large pictures live in the artifact's file store; fetch them before the database transaction.
+    const fetched = new Map<string, Blob>();
+    for (const [id, body] of remote) {
+      if (id.startsWith("img~") && typeof body.blobId === "string") {
+        try {
+          const res = await fetch("/_blob/" + body.blobId);
+          if (res.ok) fetched.set(id, await res.blob());
+        } catch {
+          /* keep going without this picture */
+        }
+      }
+    }
+
     // Remote wins: replace the synced stores locally.
     const tx = d.transaction(["runs", "adventures", "narration", "topics", "qstats", "marks", "images", "kv", "questions"], "readwrite");
     for (const s of ["runs", "narration", "topics", "qstats", "marks"] as const) await tx.objectStore(s).clear();
@@ -245,8 +264,8 @@ export async function startSync(): Promise<boolean> {
           const q = await tx.objectStore("questions").get(mark.key);
           await tx.objectStore("marks").put({ ...mark, snapshot: { ...mark.snapshot, imageId: q?.imageId } });
         }
-      } else if (id.startsWith("img~") && typeof body.url === "string") {
-        const blob = dataUriToBlob(body.url as string);
+      } else if (id.startsWith("img~") && (typeof body.url === "string" || fetched.has(id))) {
+        const blob = fetched.get(id) ?? dataUriToBlob(body.url as string);
         await imgs.put({ id: body.id as string, blob, kind: body.kind as "portrait" | "asset", width: Number(body.width) || 0, height: Number(body.height) || 0, bytes: blob.size, createdAt: Date.now() });
       }
     }

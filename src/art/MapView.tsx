@@ -3,6 +3,8 @@
 import { useMemo } from "react";
 import type { Adventure, AdventureMap, MapFeature } from "../lib/types";
 import { terrainFor } from "./scenes";
+import { assetId, usePins } from "../lib/art";
+import { useStoredImage } from "../lib/images";
 
 function rng(seed: number) {
   let s = seed >>> 0 || 1;
@@ -145,7 +147,44 @@ export interface MapProps {
   compact?: boolean;
 }
 
-export function MapView({ adv, stopIndex, travel, compact }: MapProps) {
+export function MapView(props: MapProps) {
+  const img = useStoredImage(assetId(props.adv.id, "map", "main"));
+  const pins = usePins(props.adv.id);
+  if (img === undefined) return <div className={`map-frame ${props.compact ? "map-compact" : ""} map-wait`} />;
+  if (img) return <PictureMap {...props} url={img.url} pins={pins} />;
+  return <DrawnMap {...props} />;
+}
+
+/** The player's own map picture, with the route drawn through the pins they placed. */
+function PictureMap({ adv, stopIndex, compact, url, pins }: MapProps & { url: string; pins: Record<string, { x: number; y: number }> }) {
+  const stopsSeen: { id: string; name: string }[] = [];
+  for (const s of adv.stops) if (!stopsSeen.some((x) => x.id === s.locationId)) stopsSeen.push({ id: s.locationId, name: s.location });
+  const cur = adv.stops[Math.min(stopIndex, adv.stops.length - 1)];
+  const done = stopIndex >= adv.stops.length;
+  const curIdx = stopsSeen.findIndex((x) => x.id === cur?.locationId);
+  const placed = stopsSeen.map((l, i) => ({ ...l, i, p: pins[l.id] })).filter((x) => x.p);
+  return (
+    <div className={`map-frame map-picture ${compact ? "map-compact" : ""}`}>
+      <div className="map-picture-inner">
+        <img src={url} alt={`Map of ${adv.title}`} />
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="map-route" aria-hidden="true">
+          <polyline points={placed.map((x) => `${x.p!.x},${x.p!.y}`).join(" ")} fill="none" stroke="#7a2318" strokeWidth="3" strokeDasharray="6 5" vectorEffect="non-scaling-stroke" />
+        </svg>
+        {placed.map((x) => {
+          const state = done || x.i < curIdx ? "done" : x.i === curIdx ? "here" : "todo";
+          return (
+            <div key={x.id} className={`pin pin-${state}`} style={{ left: `${x.p!.x}%`, top: `${x.p!.y}%` }} title={x.name}>
+              {x.i + 1}
+            </div>
+          );
+        })}
+      </div>
+      {placed.length === 0 && <p className="map-hint">Place the locations on your map from the art checklist.</p>}
+    </div>
+  );
+}
+
+function DrawnMap({ adv, stopIndex, travel, compact }: MapProps) {
   const map = useMemo(() => mapFor(adv), [adv]);
   const route = useMemo(() => routeOf(adv, map), [adv, map]);
   const cur = adv.stops[Math.min(stopIndex, adv.stops.length - 1)];

@@ -13,8 +13,10 @@ import { Review } from "./screens/Review";
 import { Stats } from "./screens/Stats";
 import { SettingsScreen } from "./screens/Settings";
 import { Upload } from "./screens/Upload";
+import { ImportModule } from "./screens/ImportModule";
+import { ArtScreen } from "./screens/Art";
 
-export type Screen = "home" | "newrun" | "play" | "map" | "character" | "review" | "stats" | "settings" | "upload";
+export type Screen = "home" | "newrun" | "play" | "map" | "character" | "review" | "stats" | "settings" | "upload" | "import" | "art";
 
 interface AppCtx {
   settings: Settings;
@@ -115,6 +117,8 @@ export default function App() {
         {screen === "stats" && <Stats />}
         {screen === "settings" && <SettingsScreen />}
         {screen === "upload" && <Upload />}
+        {screen === "import" && <ImportModule />}
+        {screen === "art" && <ArtScreen />}
       </div>
     </Ctx.Provider>
   );
