@@ -52,6 +52,27 @@ code holds no personal content, so a public repository is fine. Your questions n
 **Install on iPhone/iPad:** open the site in Safari → Share → *Add to Home Screen*.
 **Install on Windows:** open it in Chrome or Edge → install icon in the address bar.
 
+## Claude artifact version
+
+The same game also runs as a Claude artifact on claude.ai: no hosting, no proxy and no API key.
+
+- **Claude as DM:** narration, typed-answer checks and explanations go straight to Claude on your own
+  Claude account (it asks permission the first time). Narration uses the quick model; answer checks use the
+  default model and explanations the most capable one.
+- **Progress follows your account:** runs, marks, statistics, streak, settings, narration and portraits are
+  saved to your private area of the artifact's store, so the game picks up where you left off on iPhone, iPad
+  or Windows. The day's question upload and its images stay in the browser you uploaded them in.
+- **Backup** still works: *Settings → Export backup* asks before saving the file.
+
+Build and publish:
+
+```bash
+npm run build:artifact   # writes dist-artifact/study-rpg.html plus the data files
+```
+
+Publish `dist-artifact/study-rpg.html` with `levels.json`, `sample-questions.json` and
+`adventures/*.json` beside it, declaring the capabilities `sample`, `db`, `user` and `downloads`.
+
 ## The AI proxy (optional)
 
 The game works fully without AI. To turn on the AI Dungeon Master, typed-answer checking and explanations,

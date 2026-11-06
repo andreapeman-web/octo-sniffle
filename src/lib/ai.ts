@@ -1,9 +1,14 @@
-// Client for the serverless AI proxy. Every call has an offline fallback, so the game never blocks.
+// AI calls: through Claude directly when running as a Claude artifact, otherwise
+// through the serverless proxy. Every call has an offline fallback, so the game never blocks.
+import { callClaude } from "./claudeAi";
 import { db } from "./db";
+import { IS_ARTIFACT_BUILD } from "./platform";
+import { pushNarration } from "./sync";
 import { currentStop, lineup } from "./engine";
 import type { Adventure, NarrationBundle, Question, Run, Settings } from "./types";
 
 async function post<T>(s: Settings, path: string, body: unknown, timeoutMs = 45_000): Promise<T> {
+  if (IS_ARTIFACT_BUILD) return callClaude<T>(path, body);
   if (!s.proxyUrl) throw new Error("AI proxy not configured");
   if (!navigator.onLine) throw new Error("offline");
   const ctrl = new AbortController();
@@ -29,7 +34,7 @@ export async function testProxy(s: Settings): Promise<string> {
   return j.model;
 }
 
-export const aiEnabled = (s: Settings) => Boolean(s.proxyUrl && s.proxyToken);
+export const aiEnabled = (s: Settings) => (IS_ARTIFACT_BUILD ? s.useClaude !== false : Boolean(s.proxyUrl && s.proxyToken));
 
 // ---------- Narration ----------
 
@@ -91,6 +96,7 @@ export function getStopNarration(adv: Adventure, run: Run, stopIndex: number, s:
         ai: true,
       };
       await d.put("narration", bundle);
+      pushNarration(adv.id);
       return bundle;
     } catch {
       return fb;
@@ -140,6 +146,7 @@ export async function getEndingNarration(adv: Adventure, run: Run, s: Settings):
       character: { name: run.character.name, level: run.character.level },
     });
     await d.put("narration", { key, narration: out.narration, intros: {}, hitLines: [], missLines: [], ai: true });
+    pushNarration(adv.id);
     return out.narration;
   } catch {
     return adv.ending;

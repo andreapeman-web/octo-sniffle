@@ -2,6 +2,7 @@
 import { ALL_STORES, db, kvGet, kvSet, type StoreName } from "./db";
 import { forgetImageUrl } from "./images";
 import { invalidatePool } from "./questions";
+import { pushKv, uploadAll } from "./sync";
 
 const FORMAT = "study-rpg-backup";
 
@@ -54,6 +55,7 @@ export async function exportBackup(): Promise<Blob> {
   }
   parts.push("}}");
   await kvSet("lastExport", Date.now());
+  pushKv("lastExport");
   const s = await kvGet<Record<string, unknown>>("settings");
   if (s) await kvSet("settings", { ...s, lastExport: Date.now() });
   return new Blob(parts, { type: "application/json" });
@@ -84,6 +86,7 @@ export async function importBackup(file: File): Promise<void> {
   }
   await tx.done;
   invalidatePool();
+  await uploadAll();
 }
 
 export interface StorageReport {

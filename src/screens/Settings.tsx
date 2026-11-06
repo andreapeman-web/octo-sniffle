@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useApp } from "../App";
 import { TopicPicker } from "../components/Panels";
-import { TopBar, downloadBlob } from "../components/ui";
+import { ConfirmButton, TopBar, downloadBlob } from "../components/ui";
 import { testProxy } from "../lib/ai";
 import { exportBackup, fmtBytes, importBackup, requestPersistence, storageReport, type StorageReport } from "../lib/backup";
 import { ALL_STORES, db } from "../lib/db";
 import { deleteRun } from "../lib/store";
+import { IS_ARTIFACT_BUILD, saveFile } from "../lib/platform";
+import { onSyncStatus, syncStatus, wipeRemote } from "../lib/sync";
 
 export function SettingsScreen() {
   const { settings, updateSettings, go, run, adventure, reloadAll } = useApp();
@@ -16,6 +18,9 @@ export function SettingsScreen() {
   const [msg, setMsg] = useState("");
   const [topics, setTopics] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const [pendingRestore, setPendingRestore] = useState<File | null>(null);
+  const [sync, setSync] = useState(syncStatus());
+  useEffect(() => onSyncStatus(setSync), []);
 
   const refreshReport = () => void storageReport().then(setReport);
   useEffect(refreshReport, []);
@@ -35,14 +40,17 @@ export function SettingsScreen() {
   const doExport = async () => {
     setMsg("Preparing backup…");
     const blob = await exportBackup();
-    const d = new Date();
-    downloadBlob(blob, `study-rpg-backup-${d.toISOString().slice(0, 10)}.json`);
+    const name = `study-rpg-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    if (IS_ARTIFACT_BUILD) {
+      const r = await saveFile(name, blob);
+      if (r !== "saved") return setMsg(r === "declined" ? "Backup not saved." : "This view can't save files. Open the artifact on claude.ai to export.");
+    } else downloadBlob(blob, name);
     await updateSettings({ lastExport: Date.now() });
     setMsg(`Backup saved (${fmtBytes(blob.size)}). Keep it in iCloud Drive / OneDrive to move to another device.`);
   };
 
   const doImport = async (f: File) => {
-    if (!confirm("Restoring replaces ALL data on this device with the backup. Continue?")) return;
+    setPendingRestore(null);
     try {
       await importBackup(f);
       await reloadAll();
@@ -55,14 +63,13 @@ export function SettingsScreen() {
 
   const resetRun = async () => {
     if (!run || !adventure) return;
-    if (!confirm(`Reset your progress in "${adventure.title}"? Study marks and statistics are kept.`)) return;
     await deleteRun(adventure.id);
     await reloadAll();
     setMsg("Adventure progress reset.");
   };
 
   const resetAll = async () => {
-    if (!confirm("Delete EVERYTHING on this device (progress, marks, statistics, questions, images)? Export a backup first if unsure.")) return;
+    await wipeRemote();
     const d = await db();
     const tx = d.transaction(ALL_STORES, "readwrite");
     for (const s of ALL_STORES) await tx.objectStore(s).clear();
@@ -98,7 +105,16 @@ export function SettingsScreen() {
           <button className="btn primary" onClick={doExport}>Export backup</button>
           <button className="btn" onClick={() => fileRef.current?.click()}>Restore backup</button>
         </div>
-        <input ref={fileRef} type="file" accept=".json,application/json" hidden onChange={(e) => e.target.files?.[0] && doImport(e.target.files[0])} />
+        <input ref={fileRef} type="file" accept=".json,application/json" hidden onChange={(e) => { const f = e.target.files?.[0]; e.target.value = ""; if (f) setPendingRestore(f); }} />
+        {pendingRestore && (
+          <div className="notice">
+            <span>Restore <b>{pendingRestore.name}</b>? It replaces all your progress{IS_ARTIFACT_BUILD ? " here and in your Claude account" : " on this device"}.</span>
+            <div className="row">
+              <button className="btn small bad" onClick={() => doImport(pendingRestore)}>Restore</button>
+              <button className="btn small" onClick={() => setPendingRestore(null)}>Cancel</button>
+            </div>
+          </div>
+        )}
         {settings.lastExport && <p className="muted small">Last backup: {new Date(settings.lastExport).toLocaleString()}</p>}
         {msg && <p className="notice">{msg}</p>}
       </section>
@@ -128,6 +144,18 @@ export function SettingsScreen() {
         )}
       </section>
 
+      {IS_ARTIFACT_BUILD ? (
+      <section className="card">
+        <h3>Claude as Dungeon Master</h3>
+        <p className="muted small">Claude writes the narration, checks typed answers and explains questions your file doesn't explain. It runs on your own Claude account and asks your permission the first time.</p>
+        <label className="check">
+          <input id="use-claude" type="checkbox" checked={settings.useClaude !== false} onChange={(e) => updateSettings({ useClaude: e.target.checked })} /> Use Claude
+        </label>
+        <p className="muted small">
+          Progress sync: {sync === "synced" ? "saved to your Claude account (private to you)." : sync === "connecting" ? "connecting…" : sync === "error" ? "the account store can't be reached right now; progress is kept in this browser." : "only in this browser (sign in to claude.ai to sync)."}
+        </p>
+      </section>
+      ) : (
       <section className="card">
         <h3>AI Dungeon Master</h3>
         <p className="muted small">Narration, typed-answer checking and explanations go through your own proxy, so the API key never sits on this device. Without it, the game uses the adventure's own text and you mark typed answers yourself.</p>
@@ -136,12 +164,13 @@ export function SettingsScreen() {
         <button className="btn" onClick={saveProxy}>Save & test</button>
         {proxyMsg && <p className="muted">{proxyMsg}</p>}
       </section>
+      )}
 
       <section className="card danger">
         <h3>Reset</h3>
         <div className="row">
-          <button className="btn" disabled={!run} onClick={resetRun}>Reset adventure progress</button>
-          <button className="btn bad" onClick={resetAll}>Delete all data</button>
+          <ConfirmButton className="btn" disabled={!run} onConfirm={resetRun} confirmLabel="Tap again: reset adventure">Reset adventure progress</ConfirmButton>
+          <ConfirmButton className="btn bad" onConfirm={resetAll} confirmLabel="Tap again: delete everything">Delete all data</ConfirmButton>
         </div>
       </section>
 

@@ -1,5 +1,6 @@
 // App-level persistence helpers: settings, levels table, adventures, runs.
 import { db, kvGet, kvSet } from "./db";
+import { deleteRunRemote, pushAdventure, pushKv, pushRun } from "./sync";
 import type { Adventure, LevelRow, Run, Settings } from "./types";
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -16,6 +17,7 @@ export async function loadSettings(): Promise<Settings> {
 
 export async function saveSettings(s: Settings) {
   await kvSet("settings", s);
+  pushKv("settings");
 }
 
 let levelsCache: LevelRow[] | null = null;
@@ -79,6 +81,7 @@ export function validateAdventure(a: unknown): string[] {
 
 export async function saveAdventure(a: Adventure) {
   await (await db()).put("adventures", a);
+  pushAdventure(a.id);
 }
 
 export async function getRun(adventureId: string): Promise<Run | undefined> {
@@ -87,6 +90,7 @@ export async function getRun(adventureId: string): Promise<Run | undefined> {
 
 export async function saveRun(r: Run) {
   await (await db()).put("runs", r);
+  pushRun(r.adventureId);
 }
 
 export async function deleteRun(adventureId: string) {
@@ -96,4 +100,5 @@ export async function deleteRun(adventureId: string) {
   const tx = d.transaction("narration", "readwrite");
   for (const k of keys) tx.store.delete(k);
   await tx.done;
+  deleteRunRemote(adventureId);
 }

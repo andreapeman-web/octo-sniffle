@@ -210,6 +210,8 @@ export interface Settings {
   sound: boolean;
   proxyUrl: string;
   proxyToken: string;
+  /** Artifact version: use Claude for narration, answer checks and explanations. */
+  useClaude?: boolean;
   selectedTags: string[] | null; // null = all
   lastExport?: number;
   activeAdventureId?: string;

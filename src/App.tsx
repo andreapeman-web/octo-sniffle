@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { requestPersistence } from "./lib/backup";
+import { startSync } from "./lib/sync";
 import { getUploadInfo, invalidatePool } from "./lib/questions";
 import { getRun, listAdventures, loadLevels, loadSettings, saveRun, saveSettings } from "./lib/store";
 import type { Adventure, LevelRow, Run, Settings, UploadInfo } from "./lib/types";
@@ -60,6 +61,10 @@ export default function App() {
   useEffect(() => {
     void reloadAll().then(() => setReady(true));
     void requestPersistence();
+    // As a Claude artifact: load progress saved to the viewer's account, then refresh.
+    void startSync().then(async (changed) => {
+      if (changed) await reloadAll();
+    });
   }, [reloadAll]);
 
   useEffect(() => {

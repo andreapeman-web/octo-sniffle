@@ -8,3 +8,4 @@ dev-dist/
 study-rpg-backup-*.json
 my-questions/
 *.tsbuildinfo
+dist-artifact/

@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "typecheck": "tsc -p .",
     "test": "vitest run",
-    "gen:bench": "node scripts/gen-bench-pack.mjs"
+    "gen:bench": "node scripts/gen-bench-pack.mjs",
+    "build:artifact": "tsc -p . && vite build --mode artifact && node scripts/make-artifact.mjs"
   },
   "dependencies": {
     "idb": "^8.0.4",

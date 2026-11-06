@@ -1,4 +1,5 @@
 import { db, type StoredImage } from "./db";
+import { pushImage } from "./sync";
 
 /** Resize + compress an image file/blob in the browser. ECGs etc. keep up to 2000px on the long side. */
 export async function compressImage(blob: Blob, maxDim = 2000, quality = 0.85): Promise<{ blob: Blob; width: number; height: number }> {
@@ -26,6 +27,7 @@ export async function storeImage(id: string, blob: Blob, kind: StoredImage["kind
   const c = await compressImage(blob, maxDim);
   const rec: StoredImage = { id, blob: c.blob, kind, width: c.width, height: c.height, bytes: c.blob.size, createdAt: Date.now() };
   await (await db()).put("images", rec);
+  if (kind !== "question") pushImage(id);
   return rec;
 }
 

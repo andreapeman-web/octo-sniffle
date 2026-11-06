@@ -1,6 +1,7 @@
 import { db, kvGet, kvSet, putMany } from "./db";
 import { dataUriToBlob, storeImage } from "./images";
 import type { ParsedQuestion } from "./parse";
+import { pushKv, pushMark, pushQuestionStat, pushTopics } from "./sync";
 import type { Mark, Question, QuestionStat, UploadInfo } from "./types";
 
 /** Leitner intervals by box (days). */
@@ -191,17 +192,23 @@ export async function recordAnswer(q: Question, correct: boolean, mode: "fight" 
   }
 
   const marks = tx.objectStore("marks");
+  let markChange: Mark | null | undefined;
   if (!correct) {
     const m: Mark = (await marks.get(q.key)) ?? { key: q.key, markedAt: now, wrongCount: 0, snapshot: q };
     m.wrongCount++;
     m.markedAt = now;
     m.snapshot = q;
     await marks.put(m);
-  } else if (mode === "mock") {
+    markChange = m;
+  } else if (mode === "mock" && (await marks.get(q.key))) {
     // A mark clears only after a correct answer in a mock combat.
     await marks.delete(q.key);
+    markChange = null;
   }
   await tx.done;
+  pushQuestionStat(st);
+  pushTopics();
+  if (markChange !== undefined) pushMark(q.key, markChange);
   await touchStreak();
 }
 
@@ -246,4 +253,5 @@ async function touchStreak() {
   s.days++;
   s.lastDay = today;
   await kvSet("streak", s);
+  pushKv("streak");
 }

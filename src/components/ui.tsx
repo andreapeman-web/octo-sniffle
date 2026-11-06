@@ -143,6 +143,30 @@ export function TopBar({ title, onBack, right }: { title: string; onBack?: () =>
   );
 }
 
+/** Two-step button: the first tap arms it, the second confirms (dialogs don't work inside an artifact). */
+export function ConfirmButton({ children, confirmLabel, onConfirm, className, disabled }: { children: ReactNode; confirmLabel: string; onConfirm: () => void | Promise<void>; className?: string; disabled?: boolean }) {
+  const [armed, setArmed] = useState(false);
+  useEffect(() => {
+    if (!armed) return;
+    const t = setTimeout(() => setArmed(false), 4000);
+    return () => clearTimeout(t);
+  }, [armed]);
+  return (
+    <button
+      className={`${className ?? "btn"} ${armed ? "armed" : ""}`}
+      disabled={disabled}
+      onClick={() => {
+        if (armed) {
+          setArmed(false);
+          void onConfirm();
+        } else setArmed(true);
+      }}
+    >
+      {armed ? confirmLabel : children}
+    </button>
+  );
+}
+
 export function downloadBlob(blob: Blob, name: string) {
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
