@@ -43,15 +43,17 @@ export async function listAdventures(): Promise<Adventure[]> {
   const d = await db();
   const stored = await d.getAll("adventures");
   const have = new Set(stored.map((a) => a.id));
+  // Built-in adventures are refreshed from the published file each load, so updates
+  // (new map data, fixed text) reach players who stored an older copy.
   for (const id of BUILTIN) {
-    if (have.has(id)) continue;
     try {
-      const res = await fetch(`./adventures/${id}.json`);
+      const res = await fetch(`./adventures/${id}.json`, { cache: "no-cache" });
       const a = (await res.json()) as Adventure;
       await d.put("adventures", a);
-      stored.push(a);
+      if (have.has(id)) stored.splice(stored.findIndex((x) => x.id === id), 1, a);
+      else stored.push(a);
     } catch {
-      /* offline before first load: skip */
+      /* offline: keep the stored copy */
     }
   }
   return stored;
