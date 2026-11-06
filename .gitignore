@@ -1,0 +1,10 @@
+node_modules/
+dist/
+dev-dist/
+.wrangler/
+*.local
+.DS_Store
+# never commit personal question files or backups
+study-rpg-backup-*.json
+my-questions/
+*.tsbuildinfo

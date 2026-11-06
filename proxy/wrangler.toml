@@ -1,0 +1,12 @@
+name = "study-rpg-proxy"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# Set to your GitHub Pages origin, e.g. "https://andreapeman-web.github.io"
+ALLOWED_ORIGINS = "*"
+# MODEL = "claude-haiku-5-5"   # uncomment to use a cheaper model
+
+# Secrets (never commit them):  npx wrangler secret put ANTHROPIC_API_KEY
+#                               npx wrangler secret put APP_TOKEN

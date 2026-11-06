@@ -1,0 +1,125 @@
+{
+  "_comment": "Character progression. Edit freely: xp = total XP needed for the level (5e thresholds), maxHp = 12 + 8 per level after 1, damage = damage dealt per correct answer.",
+  "levels": [
+    {
+      "level": 1,
+      "xp": 0,
+      "maxHp": 12,
+      "damage": 8
+    },
+    {
+      "level": 2,
+      "xp": 300,
+      "maxHp": 20,
+      "damage": 10
+    },
+    {
+      "level": 3,
+      "xp": 900,
+      "maxHp": 28,
+      "damage": 10
+    },
+    {
+      "level": 4,
+      "xp": 2700,
+      "maxHp": 36,
+      "damage": 18
+    },
+    {
+      "level": 5,
+      "xp": 6500,
+      "maxHp": 44,
+      "damage": 33
+    },
+    {
+      "level": 6,
+      "xp": 14000,
+      "maxHp": 52,
+      "damage": 35
+    },
+    {
+      "level": 7,
+      "xp": 23000,
+      "maxHp": 60,
+      "damage": 36
+    },
+    {
+      "level": 8,
+      "xp": 34000,
+      "maxHp": 68,
+      "damage": 36
+    },
+    {
+      "level": 9,
+      "xp": 48000,
+      "maxHp": 76,
+      "damage": 38
+    },
+    {
+      "level": 10,
+      "xp": 64000,
+      "maxHp": 84,
+      "damage": 40
+    },
+    {
+      "level": 11,
+      "xp": 85000,
+      "maxHp": 92,
+      "damage": 41
+    },
+    {
+      "level": 12,
+      "xp": 100000,
+      "maxHp": 100,
+      "damage": 43
+    },
+    {
+      "level": 13,
+      "xp": 120000,
+      "maxHp": 108,
+      "damage": 44
+    },
+    {
+      "level": 14,
+      "xp": 140000,
+      "maxHp": 116,
+      "damage": 44
+    },
+    {
+      "level": 15,
+      "xp": 165000,
+      "maxHp": 124,
+      "damage": 44
+    },
+    {
+      "level": 16,
+      "xp": 195000,
+      "maxHp": 132,
+      "damage": 45
+    },
+    {
+      "level": 17,
+      "xp": 225000,
+      "maxHp": 140,
+      "damage": 47
+    },
+    {
+      "level": 18,
+      "xp": 265000,
+      "maxHp": 148,
+      "damage": 47
+    },
+    {
+      "level": 19,
+      "xp": 305000,
+      "maxHp": 156,
+      "damage": 48
+    },
+    {
+      "level": 20,
+      "xp": 355000,
+      "maxHp": 164,
+      "damage": 53
+    }
+  ]
+}

@@ -1,0 +1,468 @@
+{
+ "format": "study-rpg-adventure",
+ "version": 1,
+ "id": "lantern-of-saint-quell",
+ "title": "The Lantern of Saint Quell",
+ "author": "Sample adventure written for Study RPG",
+ "recommendedLevel": 1,
+ "styleGuide": "Dark fantasy, painterly, muted greens and candle-gold, winter fens.",
+ "synopsis": "A healer-knight travels to the fevered village of Hollowmere to recover the stolen Lantern of Saint Quell, whose light keeps the winter fever away. The trail leads from a goblin camp at Bramble Ford, through the flooded Drowned Chapel, to an ogre's cave at Black Tarn.",
+ "intro": "Hollowmere is burning with winter fever. Its holy Lantern, which has kept sickness from the village for a hundred years, has been stolen. You are a travelling healer-knight, and the abbess has asked you to bring it home.",
+ "ending": "You carry the Lantern of Saint Quell back across the tarn, through the marsh and over the ford. When it is hung again in the temple of Hollowmere, its light falls on the sickbeds, and by morning the fevers have broken.",
+ "chapters": [
+  {
+   "id": "c1",
+   "title": "Chapter 1: The Road to Hollowmere"
+  },
+  {
+   "id": "c2",
+   "title": "Chapter 2: The Drowned Chapel"
+  },
+  {
+   "id": "c3",
+   "title": "Chapter 3: The Ogre of Black Tarn"
+  }
+ ],
+ "safePlaces": [
+  {
+   "id": "temple",
+   "name": "Temple of Saint Quell, Hollowmere",
+   "description": "A small stone temple full of sickbeds, kept by the tired but kind abbess."
+  },
+  {
+   "id": "shrine",
+   "name": "Wayside shrine at Bramble Ford",
+   "description": "A moss-covered shrine with a spring of clean water and a lean-to for travellers."
+  },
+  {
+   "id": "inn",
+   "name": "The Heron's Rest inn",
+   "description": "A smoky inn at the edge of the hills, where the innkeeper asks no questions."
+  }
+ ],
+ "monsters": {
+  "wolf": {
+   "id": "wolf",
+   "name": "Wolf",
+   "hp": 11,
+   "ac": 13,
+   "hitDamage": 7,
+   "attacks": [
+    {
+     "name": "Bite",
+     "damage": 7,
+     "text": "+4 to hit, 7 (2d4 + 2) piercing; target knocked prone on a failed DC 11 Str save"
+    }
+   ],
+   "xp": 50,
+   "cr": "1/4",
+   "source": "5e SRD 5.1 (CC-BY-4.0)",
+   "icon": "🐺",
+   "description": "A lean grey wolf, ribs showing through its winter coat."
+  },
+  "goblin": {
+   "id": "goblin",
+   "name": "Goblin",
+   "hp": 7,
+   "ac": 15,
+   "hitDamage": 5,
+   "attacks": [
+    {
+     "name": "Scimitar",
+     "damage": 5,
+     "text": "+4 to hit, 5 (1d6 + 2) slashing"
+    },
+    {
+     "name": "Shortbow",
+     "damage": 5,
+     "text": "+4 to hit, range 80/320 ft., 5 (1d6 + 2) piercing"
+    }
+   ],
+   "xp": 50,
+   "cr": "1/4",
+   "source": "5e SRD 5.1 (CC-BY-4.0)",
+   "icon": "👺",
+   "description": "A small, sharp-toothed raider in stolen leathers."
+  },
+  "bugbear": {
+   "id": "bugbear",
+   "name": "Bugbear",
+   "hp": 27,
+   "ac": 16,
+   "hitDamage": 11,
+   "attacks": [
+    {
+     "name": "Morningstar",
+     "damage": 11,
+     "text": "+4 to hit, 11 (2d8 + 2) piercing"
+    }
+   ],
+   "xp": 200,
+   "cr": "1",
+   "source": "5e SRD 5.1 (CC-BY-4.0)",
+   "icon": "👹",
+   "description": "Grull, a hulking bugbear who leads the goblins of the ford."
+  },
+  "giant-rat": {
+   "id": "giant-rat",
+   "name": "Giant Rat",
+   "hp": 7,
+   "ac": 12,
+   "hitDamage": 4,
+   "attacks": [
+    {
+     "name": "Bite",
+     "damage": 4,
+     "text": "+4 to hit, 4 (1d4 + 2) piercing"
+    }
+   ],
+   "xp": 25,
+   "cr": "1/8",
+   "source": "5e SRD 5.1 (CC-BY-4.0)",
+   "icon": "🐀",
+   "description": "A dog-sized rat, slick with marsh water."
+  },
+  "skeleton": {
+   "id": "skeleton",
+   "name": "Skeleton",
+   "hp": 13,
+   "ac": 13,
+   "hitDamage": 5,
+   "attacks": [
+    {
+     "name": "Shortsword",
+     "damage": 5,
+     "text": "+4 to hit, 5 (1d6 + 2) piercing"
+    },
+    {
+     "name": "Shortbow",
+     "damage": 5,
+     "text": "+4 to hit, 5 (1d6 + 2) piercing"
+    }
+   ],
+   "xp": 50,
+   "cr": "1/4",
+   "source": "5e SRD 5.1 (CC-BY-4.0)",
+   "icon": "💀",
+   "description": "Bones of an old chapel guard, still wearing a rusted tabard."
+  },
+  "zombie": {
+   "id": "zombie",
+   "name": "Zombie",
+   "hp": 22,
+   "ac": 8,
+   "hitDamage": 4,
+   "attacks": [
+    {
+     "name": "Slam",
+     "damage": 4,
+     "text": "+3 to hit, 4 (1d6 + 1) bludgeoning"
+    }
+   ],
+   "xp": 50,
+   "cr": "1/4",
+   "source": "5e SRD 5.1 (CC-BY-4.0)",
+   "icon": "🧟",
+   "description": "A drowned pilgrim, shuffling and bloated."
+  },
+  "giant-spider": {
+   "id": "giant-spider",
+   "name": "Giant Spider",
+   "hp": 26,
+   "ac": 14,
+   "hitDamage": 7,
+   "attacks": [
+    {
+     "name": "Bite",
+     "damage": 7,
+     "text": "+5 to hit, 7 (1d8 + 3) piercing, plus 9 (2d8) poison on a failed DC 11 Con save (half on success). The game uses the fixed 7."
+    },
+    {
+     "name": "Web",
+     "damage": 0,
+     "text": "Recharge 5–6, restrains the target"
+    }
+   ],
+   "xp": 200,
+   "cr": "1",
+   "source": "5e SRD 5.1 (CC-BY-4.0)",
+   "icon": "🕷️",
+   "description": "A spider the size of a cart, nesting in the bell tower."
+  },
+  "ghoul": {
+   "id": "ghoul",
+   "name": "Ghoul",
+   "hp": 22,
+   "ac": 12,
+   "hitDamage": 7,
+   "attacks": [
+    {
+     "name": "Claws",
+     "damage": 7,
+     "text": "+4 to hit, 7 (2d4 + 2) slashing; paralysis on a failed DC 10 Con save"
+    },
+    {
+     "name": "Bite",
+     "damage": 9,
+     "text": "+2 to hit, 9 (2d6 + 2) piercing"
+    }
+   ],
+   "xp": 200,
+   "cr": "1",
+   "source": "5e SRD 5.1 (CC-BY-4.0)",
+   "icon": "🧛",
+   "description": "The chapel's last keeper, turned hungry in the dark."
+  },
+  "bandit": {
+   "id": "bandit",
+   "name": "Bandit",
+   "hp": 11,
+   "ac": 12,
+   "hitDamage": 4,
+   "attacks": [
+    {
+     "name": "Scimitar",
+     "damage": 4,
+     "text": "+3 to hit, 4 (1d6 + 1) slashing"
+    },
+    {
+     "name": "Light crossbow",
+     "damage": 5,
+     "text": "+3 to hit, 5 (1d8 + 1) piercing"
+    }
+   ],
+   "xp": 25,
+   "cr": "1/8",
+   "source": "5e SRD 5.1 (CC-BY-4.0)",
+   "icon": "🗡️",
+   "description": "A hired blade paid in stolen silver."
+  },
+  "ogre": {
+   "id": "ogre",
+   "name": "Ogre",
+   "hp": 59,
+   "ac": 11,
+   "hitDamage": 13,
+   "attacks": [
+    {
+     "name": "Greatclub",
+     "damage": 13,
+     "text": "+6 to hit, 13 (2d8 + 4) bludgeoning"
+    },
+    {
+     "name": "Javelin",
+     "damage": 11,
+     "text": "+6 to hit, 11 (2d6 + 4) piercing"
+    }
+   ],
+   "xp": 450,
+   "cr": "2",
+   "source": "5e SRD 5.1 (CC-BY-4.0)",
+   "icon": "🪨",
+   "description": "Morrow the Ogre, who carried the stolen Lantern into the tarn caves."
+  }
+ },
+ "stops": [
+  {
+   "id": "s1",
+   "chapterId": "c1",
+   "location": "Old Mill Road",
+   "locationId": "mill-road",
+   "safePlaceId": "temple",
+   "description": "A frost-bitten cart road past a burnt-out mill, two miles from Hollowmere.",
+   "narration": "You leave the last farmstead behind as the light fails. The old mill road is rutted with frost, and the burnt mill's wheel creaks in the wind. A message from the abbess of Hollowmere sits in your satchel: the Lantern of Saint Quell has been stolen, and without its light the winter fever spreads. Somewhere behind the mill, two pairs of eyes catch the moonlight.",
+   "encounter": {
+    "id": "e1",
+    "name": "Wolves at the mill",
+    "boss": false,
+    "monsters": [
+     {
+      "monsterId": "wolf",
+      "count": 2
+     }
+    ]
+   }
+  },
+  {
+   "id": "s2",
+   "chapterId": "c1",
+   "location": "Hollowmere Gate",
+   "locationId": "hollowmere-gate",
+   "safePlaceId": "temple",
+   "description": "The palisade gate of Hollowmere village, half broken in, with goblin tracks in the mud.",
+   "narration": "Hollowmere's gate hangs from one hinge. Inside, villagers bar their doors and point you toward the temple, where the abbess is tending the fevered. Before you reach it, a pack of goblins drops from the palisade, laughing, still carrying candlesticks from the chapel.",
+   "encounter": {
+    "id": "e2",
+    "name": "Goblin raiders",
+    "boss": false,
+    "monsters": [
+     {
+      "monsterId": "goblin",
+      "count": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "s3",
+   "chapterId": "c1",
+   "location": "Bramble Ford",
+   "locationId": "bramble-ford",
+   "safePlaceId": "shrine",
+   "description": "A shallow river crossing choked with brambles, where the goblins keep their camp.",
+   "narration": "The goblins' trail runs south to Bramble Ford, where smoke rises from a camp among the thorns. Stolen silver glints on a drying rack. At the water's edge waits Grull the bugbear, the goblins' chief, morningstar resting on his shoulder. He grins: the Lantern, he says, went to the ogre long ago.",
+   "encounter": {
+    "id": "e3",
+    "name": "Grull of Bramble Ford",
+    "boss": true,
+    "monsters": [
+     {
+      "monsterId": "bugbear",
+      "count": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "s4",
+   "chapterId": "c2",
+   "location": "Drowned Path",
+   "locationId": "drowned-path",
+   "safePlaceId": "shrine",
+   "description": "A causeway through the marsh, half sunk, leading to the old chapel.",
+   "narration": "Grull's map leads east into the marsh, where an old causeway runs toward the Drowned Chapel. Each step sinks a little. Lanterns of marsh-gas drift over the reeds, and something large and wet rustles beneath the boards.",
+   "encounter": {
+    "id": "e4",
+    "name": "Rats of the causeway",
+    "boss": false,
+    "monsters": [
+     {
+      "monsterId": "giant-rat",
+      "count": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "s5",
+   "chapterId": "c2",
+   "location": "Chapel Crypt",
+   "locationId": "chapel-crypt",
+   "safePlaceId": "shrine",
+   "description": "The flooded crypt under the Drowned Chapel, full of old pilgrims' graves.",
+   "narration": "The chapel doors open on knee-deep black water. Stone steps lead down to the crypt, where the old guards were buried in their tabards. As your torch reaches the bottom step, the bones begin to stand.",
+   "encounter": {
+    "id": "e5",
+    "name": "The restless crypt",
+    "boss": false,
+    "monsters": [
+     {
+      "monsterId": "skeleton",
+      "count": 2
+     },
+     {
+      "monsterId": "zombie",
+      "count": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "s6",
+   "chapterId": "c2",
+   "location": "Bell Tower",
+   "locationId": "bell-tower",
+   "safePlaceId": "shrine",
+   "description": "The chapel's leaning bell tower, wrapped in thick grey webs.",
+   "narration": "A rope ladder climbs the bell tower to a ledge where, the villagers said, the Lantern once hung. The bell is wrapped in grey silk, and the silk is moving.",
+   "encounter": {
+    "id": "e6",
+    "name": "Nest in the bell tower",
+    "boss": false,
+    "monsters": [
+     {
+      "monsterId": "giant-spider",
+      "count": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "s7",
+   "chapterId": "c2",
+   "location": "Undercroft",
+   "locationId": "undercroft",
+   "safePlaceId": "shrine",
+   "description": "The deepest vault under the chapel, where the last keeper hid from the flood.",
+   "narration": "Below the crypt, a narrow passage leads to the undercroft where the chapel's keeper sealed himself in during the great flood. The seal is broken from the inside. A thin, starving voice asks if you have come to bring him supper.",
+   "encounter": {
+    "id": "e7",
+    "name": "The last keeper",
+    "boss": true,
+    "monsters": [
+     {
+      "monsterId": "ghoul",
+      "count": 1
+     }
+    ]
+   }
+  },
+  {
+   "id": "s8",
+   "chapterId": "c3",
+   "location": "Black Tarn Shore",
+   "locationId": "tarn-shore",
+   "safePlaceId": "inn",
+   "description": "A black lake under the hills, with a bandit watch-post on the shore.",
+   "narration": "Beyond the marsh the land rises to Black Tarn, a still lake under bare hills. The keeper's ledger spoke of a cave across the water. Two bandits paid by the ogre guard the only boat.",
+   "encounter": {
+    "id": "e8",
+    "name": "Bandit watch",
+    "boss": false,
+    "monsters": [
+     {
+      "monsterId": "bandit",
+      "count": 2
+     }
+    ]
+   }
+  },
+  {
+   "id": "s9",
+   "chapterId": "c3",
+   "location": "Tarn Caves",
+   "locationId": "tarn-caves",
+   "safePlaceId": "inn",
+   "description": "The ogre's cave behind a waterfall, lit by the stolen Lantern of Saint Quell.",
+   "narration": "You row across the tarn and duck behind the waterfall. The cave glows gold: the Lantern of Saint Quell hangs from a stalactite above a heap of bones and silver. Morrow the ogre rises from his sleep, greatclub in hand, and roars that the light is his.",
+   "encounter": {
+    "id": "e9",
+    "name": "Morrow the Ogre",
+    "boss": true,
+    "monsters": [
+     {
+      "monsterId": "ogre",
+      "count": 1
+     }
+    ]
+   }
+  }
+ ],
+ "hitLines": [
+  "Your blade finds the gap in its guard.",
+  "A clean strike — it staggers back.",
+  "You read the opening and take it.",
+  "Steel bites; it howls in pain.",
+  "Your answer is true, and so is your aim.",
+  "You step inside its reach and strike hard."
+ ],
+ "missLines": [
+  "It slips past your guard and strikes.",
+  "You hesitate — and pay for it.",
+  "The blow lands before you can raise your shield.",
+  "It catches you off balance.",
+  "Pain flares as its attack connects.",
+  "You misjudge the moment and it punishes you."
+ ],
+ "credits": "Story, locations and characters are original. Monster statistics from the System Reference Document 5.1 by Wizards of the Coast LLC, licensed under CC-BY-4.0 (https://creativecommons.org/licenses/by/4.0/)."
+}

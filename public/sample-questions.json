@@ -1,0 +1,526 @@
+{
+ "format": "study-rpg-questions",
+ "version": 1,
+ "title": "Sample anaesthesia set (30 questions)",
+ "questions": [
+  {
+   "id": "smp-001",
+   "tags": [
+    "emergencies",
+    "pharmacology"
+   ],
+   "type": "single",
+   "question": "What is the initial IV dose of dantrolene in suspected malignant hyperthermia?",
+   "options": [
+    "0.25 mg/kg",
+    "1 mg/kg",
+    "2.5 mg/kg",
+    "10 mg/kg"
+   ],
+   "answer": "C",
+   "explanation": "Give dantrolene 2.5 mg/kg IV, repeated (typically 1 mg/kg boluses) until the hypermetabolic signs settle. A cumulative 10 mg/kg is a common point to reconsider the diagnosis, not a starting dose.",
+   "difficulty": 2,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-002",
+   "tags": [
+    "emergencies",
+    "monitoring"
+   ],
+   "type": "single",
+   "question": "Which is typically the earliest sign of malignant hyperthermia under general anaesthesia?",
+   "options": [
+    "Rise in core temperature",
+    "Unexplained rise in end-tidal CO₂",
+    "Dark urine",
+    "Bradycardia"
+   ],
+   "answer": "B",
+   "explanation": "Hypercarbia (rising EtCO₂ despite increased minute ventilation) and tachycardia appear early. Hyperthermia is often a late sign.",
+   "difficulty": 2,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-003",
+   "tags": [
+    "emergencies",
+    "regional"
+   ],
+   "type": "single",
+   "question": "In local anaesthetic systemic toxicity (LAST), what is the initial bolus of 20% lipid emulsion for an adult?",
+   "options": [
+    "0.5 mL/kg",
+    "1.5 mL/kg",
+    "5 mL/kg",
+    "10 mL/kg"
+   ],
+   "answer": "B",
+   "explanation": "Give 1.5 mL/kg of 20% lipid emulsion IV over about 1 minute, then start an infusion (0.25 mL/kg/min in the ASRA checklist). Repeat the bolus if instability persists.",
+   "difficulty": 3,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-004",
+   "tags": [
+    "pharmacology"
+   ],
+   "type": "single",
+   "question": "In which patient does succinylcholine carry the highest risk of life-threatening hyperkalaemia?",
+   "options": [
+    "Healthy patient for appendicectomy",
+    "Patient with a spinal cord injury 3 weeks ago",
+    "Patient with well-controlled asthma",
+    "Pregnant patient at term"
+   ],
+   "answer": "B",
+   "explanation": "Denervation (spinal cord injury, stroke), burns and prolonged immobilisation cause up-regulation of extrajunctional acetylcholine receptors, typically from about 24–72 hours after the injury, so succinylcholine can cause a large potassium release.",
+   "difficulty": 2,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-005",
+   "tags": [
+    "pharmacology"
+   ],
+   "type": "multi",
+   "question": "Which neuromuscular blockers can sugammadex reverse? (Select all that apply.)",
+   "options": [
+    "Rocuronium",
+    "Vecuronium",
+    "Cisatracurium",
+    "Mivacurium"
+   ],
+   "answer": [
+    "A",
+    "B"
+   ],
+   "explanation": "Sugammadex encapsulates aminosteroid blockers (rocuronium most strongly, then vecuronium). It has no effect on benzylisoquinolinium drugs such as cisatracurium or mivacurium.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-006",
+   "tags": [
+    "pharmacology",
+    "physiology"
+   ],
+   "type": "single",
+   "question": "Approximately what is the MAC of sevoflurane in a 40-year-old adult (in oxygen)?",
+   "options": [
+    "0.75%",
+    "1.15%",
+    "2%",
+    "6%"
+   ],
+   "answer": "C",
+   "explanation": "Sevoflurane MAC is about 2% at age 40. For comparison: halothane ~0.75%, isoflurane ~1.15%, desflurane ~6%.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-007",
+   "tags": [
+    "pharmacology"
+   ],
+   "type": "truefalse",
+   "question": "Nitrous oxide should be avoided in a patient with an undrained pneumothorax.",
+   "answer": true,
+   "explanation": "N₂O is 30–35 times more soluble in blood than nitrogen, so it diffuses into closed air spaces faster than nitrogen leaves and enlarges them.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-008",
+   "tags": [
+    "airway",
+    "preop"
+   ],
+   "type": "single",
+   "question": "In the modified Mallampati classification, what is seen in class III?",
+   "options": [
+    "Soft palate, fauces, uvula and pillars",
+    "Soft palate, fauces and uvula",
+    "Soft palate and base of the uvula",
+    "Hard palate only"
+   ],
+   "answer": "C",
+   "explanation": "Class I: soft palate, fauces, uvula, pillars. Class II: soft palate, fauces, uvula. Class III: soft palate and base of uvula. Class IV: hard palate only.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-009",
+   "tags": [
+    "preop"
+   ],
+   "type": "typed",
+   "question": "What does ASA physical status III describe?",
+   "answer": "A patient with severe systemic disease",
+   "explanation": "ASA I healthy; II mild systemic disease; III severe systemic disease; IV severe systemic disease that is a constant threat to life; V moribund; VI brain-dead organ donor. 'E' marks an emergency.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-010",
+   "tags": [
+    "pharmacology"
+   ],
+   "type": "single",
+   "question": "What is the usual propofol induction dose for a healthy adult?",
+   "options": [
+    "0.1–0.3 mg/kg",
+    "1.5–2.5 mg/kg",
+    "5–7 mg/kg",
+    "10 mg/kg"
+   ],
+   "answer": "B",
+   "explanation": "1.5–2.5 mg/kg IV for a healthy adult; reduce for elderly, hypovolaemic or haemodynamically unstable patients.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-011",
+   "tags": [
+    "pharmacology"
+   ],
+   "type": "typed",
+   "question": "What is the main mechanism of action of ketamine?",
+   "answer": "Non-competitive NMDA receptor antagonist",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-012",
+   "tags": [
+    "pharmacology"
+   ],
+   "type": "truefalse",
+   "question": "Neostigmine is given with an antimuscarinic such as glycopyrronium to counter its muscarinic side effects.",
+   "answer": true,
+   "explanation": "Neostigmine raises acetylcholine at muscarinic as well as nicotinic receptors, causing bradycardia, bronchospasm and secretions. Glycopyrronium (or atropine) blocks these effects.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-013",
+   "tags": [
+    "monitoring",
+    "pharmacology"
+   ],
+   "type": "single",
+   "question": "What train-of-four ratio (adductor pollicis) indicates adequate recovery from neuromuscular block before extubation?",
+   "options": [
+    "≥ 0.5",
+    "≥ 0.7",
+    "≥ 0.9",
+    "Four visible twitches is enough"
+   ],
+   "answer": "C",
+   "explanation": "A TOF ratio ≥ 0.9 measured quantitatively. Four visible twitches or a subjective absence of fade does not exclude residual block.",
+   "difficulty": 2,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-014",
+   "tags": [
+    "emergencies",
+    "pharmacology"
+   ],
+   "type": "single",
+   "question": "What is the adult intramuscular adrenaline (epinephrine) dose for anaphylaxis?",
+   "options": [
+    "0.05 mg (50 µg)",
+    "0.5 mg (0.5 mL of 1 mg/mL)",
+    "1 mg (10 mL of 0.1 mg/mL)",
+    "5 mg"
+   ],
+   "answer": "B",
+   "explanation": "0.5 mg IM (0.5 mL of 1 mg/mL, i.e. 1:1000) into the anterolateral thigh, repeated after 5 minutes if needed. Under anaesthesia with IV access, experienced anaesthetists titrate IV boluses of 50 µg instead.",
+   "difficulty": 2,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-015",
+   "tags": [
+    "regional",
+    "emergencies"
+   ],
+   "type": "multi",
+   "question": "Which are typical early symptoms of local anaesthetic systemic toxicity? (Select all that apply.)",
+   "options": [
+    "Circumoral numbness",
+    "Tinnitus",
+    "Metallic taste",
+    "Bradycardia as the first sign in every case"
+   ],
+   "answer": [
+    "A",
+    "B",
+    "C"
+   ],
+   "explanation": "Early CNS symptoms include perioral numbness, tinnitus, metallic taste, light-headedness and agitation. Cardiovascular collapse can occur, sometimes without prodromal CNS signs, but bradycardia is not a universal first sign.",
+   "difficulty": 2,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-016",
+   "tags": [
+    "preop"
+   ],
+   "type": "single",
+   "question": "Under ASA fasting guidance for elective procedures in healthy patients, what is the minimum fast after a light meal?",
+   "options": [
+    "2 hours",
+    "4 hours",
+    "6 hours",
+    "12 hours"
+   ],
+   "answer": "C",
+   "explanation": "ASA guidance: clear liquids 2 h, breast milk 4 h, infant formula / non-human milk / light meal 6 h; fried or fatty food or meat may need 8 h or more.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-017",
+   "tags": [
+    "regional"
+   ],
+   "type": "single",
+   "question": "What is the typical feature of a post-dural puncture headache?",
+   "options": [
+    "Worse lying down, better upright",
+    "Worse upright, better lying down",
+    "Constant regardless of posture",
+    "Only present at night"
+   ],
+   "answer": "B",
+   "explanation": "The headache is postural: it worsens within about 15 minutes of sitting or standing and eases lying flat, typically frontal-occipital, often with neck stiffness.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-018",
+   "tags": [
+    "pharmacology",
+    "regional"
+   ],
+   "type": "typed",
+   "question": "Is ropivacaine an ester or an amide local anaesthetic?",
+   "answer": "Amide",
+   "explanation": "Amide local anaesthetics have an 'i' in the name before '-caine' (lidocaine, bupivacaine, ropivacaine, prilocaine). Esters include procaine, chloroprocaine, tetracaine and cocaine.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-019",
+   "tags": [
+    "physiology"
+   ],
+   "type": "truefalse",
+   "question": "Volatile anaesthetics inhibit hypoxic pulmonary vasoconstriction in a dose-dependent way.",
+   "answer": true,
+   "explanation": "Volatile agents attenuate HPV dose-dependently, which can matter during one-lung ventilation; the effect at about 1 MAC is modest.",
+   "difficulty": 2,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-020",
+   "tags": [
+    "physiology"
+   ],
+   "type": "single",
+   "question": "What is the approximate anatomical dead space of a 70 kg adult?",
+   "options": [
+    "50 mL",
+    "150 mL",
+    "500 mL",
+    "1 L"
+   ],
+   "answer": "B",
+   "explanation": "About 2 mL/kg, roughly 150 mL in a 70 kg adult.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-021",
+   "tags": [
+    "physiology",
+    "monitoring"
+   ],
+   "type": "typed",
+   "question": "Estimate the mean arterial pressure for a blood pressure of 120/80 mmHg.",
+   "answer": "About 93 mmHg (diastolic + one third of the pulse pressure)",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-022",
+   "tags": [
+    "physiology"
+   ],
+   "type": "single",
+   "question": "Interpret this arterial blood gas:\n\n| Parameter | Value |\n|---|---|\n| pH | 7.25 |\n| PaCO₂ | 60 mmHg (8.0 kPa) |\n| HCO₃⁻ | 26 mmol/L |",
+   "options": [
+    "Acute respiratory acidosis",
+    "Chronic compensated respiratory acidosis",
+    "Metabolic acidosis",
+    "Metabolic alkalosis"
+   ],
+   "answer": "A",
+   "explanation": "Low pH with high PaCO₂ means respiratory acidosis. Bicarbonate is near normal (acute rise ≈ 1 mmol/L per 10 mmHg PaCO₂ above 40), so there has been no time for renal compensation: acute.",
+   "difficulty": 2,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-023",
+   "tags": [
+    "physiology",
+    "emergencies"
+   ],
+   "type": "single",
+   "question": "What is typically the earliest ECG change in hyperkalaemia?",
+   "options": [
+    "Peaked (tented) T waves",
+    "Prolonged QT interval",
+    "U waves",
+    "Delta waves"
+   ],
+   "answer": "A",
+   "explanation": "Peaked T waves come first; then PR prolongation and P-wave flattening, QRS widening and finally a sine-wave pattern, VF or asystole. U waves suggest hypokalaemia.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-024",
+   "tags": [
+    "pharmacology"
+   ],
+   "type": "single",
+   "question": "Ondansetron acts mainly as an antagonist at which receptor?",
+   "options": [
+    "Dopamine D2",
+    "5-HT3",
+    "Histamine H1",
+    "Muscarinic M1"
+   ],
+   "answer": "B",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-025",
+   "tags": [
+    "pharmacology",
+    "preop"
+   ],
+   "type": "single",
+   "question": "What dexamethasone dose is commonly recommended for PONV prophylaxis in adults, given at induction?",
+   "options": [
+    "0.5 mg",
+    "4–5 mg",
+    "20 mg",
+    "40 mg"
+   ],
+   "answer": "B",
+   "explanation": "Consensus guidelines suggest 4–5 mg IV at induction for PONV prophylaxis (8 mg is also used, e.g. when an anti-inflammatory effect is wanted).",
+   "difficulty": 2,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-026",
+   "tags": [
+    "preop"
+   ],
+   "type": "multi",
+   "question": "Which are risk factors in the simplified Apfel score for PONV? (Select all that apply.)",
+   "options": [
+    "Female sex",
+    "Non-smoker",
+    "History of PONV or motion sickness",
+    "Postoperative opioids",
+    "Age over 50"
+   ],
+   "answer": [
+    "A",
+    "B",
+    "C",
+    "D"
+   ],
+   "explanation": "The four Apfel factors are female sex, non-smoking status, history of PONV/motion sickness and postoperative opioids. Risk with 0/1/2/3/4 factors is roughly 10/20/40/60/80%.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-027",
+   "tags": [
+    "pharmacology",
+    "airway"
+   ],
+   "type": "single",
+   "question": "What rocuronium dose is typically used for rapid sequence induction?",
+   "options": [
+    "0.1 mg/kg",
+    "0.3 mg/kg",
+    "0.6 mg/kg",
+    "1.0–1.2 mg/kg"
+   ],
+   "answer": "D",
+   "explanation": "1.0–1.2 mg/kg gives intubating conditions in about 60 seconds, comparable to succinylcholine. 0.6 mg/kg is the standard (non-RSI) intubating dose.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-028",
+   "tags": [
+    "pharmacology",
+    "emergencies"
+   ],
+   "type": "truefalse",
+   "question": "Naloxone has a longer duration of action than morphine.",
+   "answer": false,
+   "explanation": "Naloxone's effect lasts roughly 30–90 minutes, often shorter than the opioid it reverses, so respiratory depression can return; repeated doses or an infusion may be needed.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-029",
+   "tags": [
+    "airway",
+    "emergencies"
+   ],
+   "type": "single",
+   "question": "In a 'can't intubate, can't oxygenate' (CICO) situation, which technique does the 2015 Difficult Airway Society guideline recommend?",
+   "options": [
+    "Blind nasal intubation",
+    "Scalpel cricothyroidotomy (scalpel–bougie–tube)",
+    "Awake fibreoptic intubation",
+    "Retrograde intubation"
+   ],
+   "answer": "B",
+   "explanation": "DAS 2015 Plan D: front-of-neck access with a scalpel cricothyroidotomy (scalpel, bougie, size 6.0 cuffed tube), with the patient fully paralysed.",
+   "difficulty": 1,
+   "source": "Sample question — check against your own references"
+  },
+  {
+   "id": "smp-030",
+   "tags": [
+    "monitoring",
+    "airway"
+   ],
+   "type": "single",
+   "question": "This capnography trace shows a sloped, 'shark-fin' upstroke. What is the most likely cause?",
+   "options": [
+    "Oesophageal intubation",
+    "Bronchospasm / obstructive airway disease",
+    "Rebreathing from an exhausted CO₂ absorber",
+    "Malignant hyperthermia"
+   ],
+   "answer": "B",
+   "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNjAiIGhlaWdodD0iMTMwIiB2aWV3Qm94PSIwIDAgMzYwIDEzMCI+PHJlY3Qgd2lkdGg9IjM2MCIgaGVpZ2h0PSIxMzAiIGZpbGw9IiNmZmYiLz48ZyBzdHJva2U9IiNkZGQiPjxsaW5lIHgxPSIwIiB5MT0iMTAiIHgyPSIzNjAiIHkyPSIxMCIvPjxsaW5lIHgxPSIwIiB5MT0iMzAiIHgyPSIzNjAiIHkyPSIzMCIvPjxsaW5lIHgxPSIwIiB5MT0iNTAiIHgyPSIzNjAiIHkyPSI1MCIvPjxsaW5lIHgxPSIwIiB5MT0iNzAiIHgyPSIzNjAiIHkyPSI3MCIvPjxsaW5lIHgxPSIwIiB5MT0iOTAiIHgyPSIzNjAiIHkyPSI5MCIvPjxsaW5lIHgxPSIwIiB5MT0iMTEwIiB4Mj0iMzYwIiB5Mj0iMTEwIi8+PC9nPjxwYXRoIGQ9Ik0xMCwxMTAgTDMwLDExMCBDNDAsNDAgNjUsMjggOTAsMjIgTDk1LDExMCBMMTE1LDExMCBDMTI1LDQwIDE1MCwyOCAxNzUsMjIgTDE4MCwxMTAgTDIwMCwxMTAgQzIxMCw0MCAyMzUsMjggMjYwLDIyIEwyNjUsMTEwIEwyODUsMTEwIEMyOTUsNDAgMzIwLDI4IDM0NSwyMiBMMzUwLDExMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTExIiBzdHJva2Utd2lkdGg9IjIuNSIvPjx0ZXh0IHg9IjYiIHk9IjEyIiBmb250LXNpemU9IjEwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiI+RXRDTzIgKG1tSGcpPC90ZXh0Pjwvc3ZnPg==",
+   "explanation": "Slow expiratory emptying from obstructed airways produces the prolonged, sloped phase II–III upstroke. Oesophageal intubation shows little or no CO₂; rebreathing raises the baseline.",
+   "difficulty": 2,
+   "source": "Sample question — check against your own references"
+  }
+ ]
+}
